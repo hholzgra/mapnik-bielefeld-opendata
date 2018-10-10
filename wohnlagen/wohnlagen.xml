@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY datasource-settings SYSTEM "../inc/datasource-settings.xml.inc">
+]>
+
+<Map srs="+init=epsg:3857" background-color="transparent">
+
+<Style name="wohnlage">
+  <Rule>
+    <Filter>[lage]=1</Filter>
+    <PolygonSymbolizer fill="yellow" fill-opacity="0.2"/>
+  </Rule>
+  <Rule>
+    <Filter>[lage]=2</Filter>
+    <PolygonSymbolizer fill="green" fill-opacity="0.2"/>
+  </Rule>
+  <Rule>
+    <Filter>[lage]=3</Filter>
+    <PolygonSymbolizer fill="blue" fill-opacity="0.2"/>
+  </Rule>
+  <Rule>
+    <Filter>[lage]=4</Filter>
+    <PolygonSymbolizer fill="blue" fill-opacity="0.4"/>
+  </Rule>
+</Style>
+
+<Layer name="wohnlage" srs="+init=epsg:25832" >
+  <StyleName>wohnlage</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (SELECT way, lage
+         FROM bielefeld_wohnlagen
+      ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
+</Map>

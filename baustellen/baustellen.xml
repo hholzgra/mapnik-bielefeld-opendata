@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY datasource-settings SYSTEM "../inc/datasource-settings.xml.inc">
+]>
+
+<Map srs="+init=epsg:3857" background-color="transparent">
+
+<Style name="baustellen">
+  <Rule>
+    <PointSymbolizer file="Baustelle.svg" transform="scale(0.03,0.03)" opacity="0.5"/>
+  </Rule>
+</Style>
+
+<Layer name="baustellen" srs="+init=epsg:25832" >
+  <StyleName>baustellen</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (SELECT way
+         FROM bielefeld_baustellen
+      ) AS way
+    </Parameter>
+    <Parameter name="geometry_field">way</Parameter>
+    &datasource-settings;
+  </Datasource>
+</Layer>
+
+</Map>

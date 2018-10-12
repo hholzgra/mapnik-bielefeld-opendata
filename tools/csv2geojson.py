@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import sys
+import io
 import csv
 import json
 import geojson
@@ -15,7 +16,7 @@ project = partial(
     pyproj.Proj(init='epsg:4326')) # destination coordinate system
 
 features = []
-with sys.stdin as csv_file:
+with io.open(sys.stdin.fileno(),'r', encoding='iso-8859-1') as csv_file:
     csv_reader = csv.DictReader(csv_file, delimiter=';')
     for row in csv_reader:
         properties = {}
@@ -29,4 +30,4 @@ with sys.stdin as csv_file:
 
 featurecollection = { "type": "FeatureCollection", "features": features }
 
-print(json.dumps(featurecollection))
+print(json.dumps(featurecollection, indent=2, ensure_ascii=False))

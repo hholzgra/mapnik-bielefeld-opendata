@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY datasource-settings SYSTEM "../inc/datasource-settings.xml.inc">
+]>
+
+<Map srs="+init=epsg:3857" background-color="transparent">
+
+<Style name="wohnlage">
+  <Rule>
+    <Filter>[lagequalit]=1</Filter>
+    <PolygonSymbolizer fill="yellow" fill-opacity="0.2"/>
+  </Rule>
+  <Rule>
+    <Filter>[lagequalit]=2</Filter>
+    <PolygonSymbolizer fill="green" fill-opacity="0.2"/>
+  </Rule>
+  <Rule>
+    <Filter>[lagequalit]=3</Filter>
+    <PolygonSymbolizer fill="blue" fill-opacity="0.2"/>
+  </Rule>
+  <Rule>
+    <Filter>[lagequalit]=4</Filter>
+    <PolygonSymbolizer fill="blue" fill-opacity="0.4"/>
+  </Rule>
+</Style>
+
+<Layer name="wohnlage" srs="+init=epsg:25832" >
+  <StyleName>wohnlage</StyleName>
+  <Datasource>
+       <Parameter name="type">csv</Parameter>
+       <Parameter name="file">wohnlagen.csv</Parameter>
+  </Datasource>
+</Layer>
+
+</Map>
